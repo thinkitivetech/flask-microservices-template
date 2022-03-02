@@ -1,0 +1,1 @@
+"""Define utility functions for the microservice app."""

@@ -1,0 +1,1 @@
+"""Base package of the microservice service."""
