@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+
+  microservice-app:
+    container_name: microservice-app
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - './app:/usr/src/app'
+    ports:
+      - 5000:5000
+    environment:
+      - FLASK_APP=main
+      - FLASK_ENV=development
+      - SECRET_KEY=supersecret
+      - STAGING_SERVER_URL=http://127.0.0.1:5000
+      - LOGGING_CONFIG=/usr/src/logging.yaml
+      - MONGODB_URL=mongodb://postgres:postgres@microservice-db:5432/mydatabase?authSource=admin
+    depends_on:
+      - microservice-db
+    links:
+      - microservice-db
+
+  microservice-db:
+    container_name: microservice-db
+    image: postgres:14.2-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./data/db:/data/db
+
+volumes:
+  db:
+    driver: local
