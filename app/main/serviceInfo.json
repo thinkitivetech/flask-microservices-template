@@ -9,9 +9,9 @@
     "apiVersion": "apiVersion",
     "availableApiVersions": [
         {
-            "version": "1.0",
-            "description": "description",
-            "path": "path"
+            "version": "1",
+            "description": "Version 1 of the API",
+            "path": "v1"
         }
     ]
 }
